@@ -1,0 +1,38 @@
+<style>
+    .recent
+    {
+        background: lightgrey;
+        color:black;
+    }
+    </style>
+<div class="container" id="dvStdList">
+    <!--<button type="button" class="btn btn-primary" (click)="editStudent(0)"><span class="glyphicon glyphicon-plus"></span> Add new </button>-->
+    <button pButton type="button" (click)="editStudent(0)" icon="fa-plus-circle" iconPos="left" label="Add New"></button>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Id </td>
+                <td>Name</td>
+                <td>Age</td>
+                <td>Email</td>
+                <td>Edit/Remove</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let std of stdList" (click)="getstdDet(std)" [class.recent]="test=='nagajyothy'"  >
+                <td style="font-weight: bold">{{std.id}}</td>
+
+                <!--<td> <a [routerLink]="['/students']" fragment='std.id' >{{std.name}}</a></td>-->
+                <!--<td> <a [routerLink]="['/students',  std.id ]">{{std.name}}</a></td>-->
+                <td>{{std.name}}</td>
+                <td>{{std.age}}</td>
+                <td>{{std.email}}</td>
+                <td> <button type="button" class="btn btn-primary" (click)="editStudent(std.id)" >
+                    <span class="glyphicon glyphicon-pencil"></span> Edit
+                    </button> 
+                <button type="button" class="btn btn-danger" (click)="removeStudent(std.id)"><span class="glyphicon glyphicon-remove"></span>Remove</button></td>
+            </tr>
+        </tbody>
+    </table>
+<my-spinner [isRunning]="isRequesting"></my-spinner>
+</div>

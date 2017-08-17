@@ -1,0 +1,21 @@
+<div class="container" style="    background: lightgray;
+    margin: 8% 5% 2% 20%;
+    padding: 3% 10% 2% 6%;">
+    <h2 style="text-align: center">Login</h2>
+    <form (ngSubmit)="OnSubmitStudent(frmLogin)" #frmLogin="ngForm" style="padding: 5%;">
+        <div class="form-group">
+            <label for="uid"> User Id   </label>
+            <input type="text" class="form-control" name="uid" #uid="ngModel" [(ngModel)]="userId"   required ngModel  />
+
+        </div>
+        <div class="form-group">
+            <label for="pwd"> Password   </label>
+            <input type="password" class="form-control" name="pwd"  [(ngModel)]="password"  #pwd="ngModel" ngModel />
+        </div>
+        <label style='color:red'>{{errorMessage}}</label>
+        
+        <button type="button" class="btn btn-primary" style="margin-left: 35%;" (click)="login()" >Submit</button>
+        <button type="button" class="btn btn-danger"> Cancel </button>
+    </form>
+    
+</div>

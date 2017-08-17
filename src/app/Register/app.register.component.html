@@ -1,0 +1,72 @@
+<div class="container">
+    <h1>Registration Form</h1>
+    <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)" #frmRegister="ngForm">
+      <div class='form-group'>
+        <label for="name" >Name</label>
+        <input type="text"  placeholder="Johnny Bravo" class="form-control" name="name"  #name="ngModel" ngModel required minlength="4" maxlength="24">
+<div *ngIf="name.errors && (name.dirty || name.touched)"
+     class="alert alert-danger">
+    <div [hidden]="!name.errors.required">
+      Name is required
+    </div>
+    <div [hidden]="!name.errors.minlength">
+      Name must be at least 4 characters long.
+    </div>
+    <div [hidden]="!name.errors.maxlength">
+      Name cannot be more than 24 characters long.
+    </div>
+</div>
+      </div>
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number"  placeholder="23" name="age" ngModel class="form-control" required #age="ngModel" />
+        <div *ngIf="age.errors && (age.dirty || age.touched)"
+     class="alert alert-danger">
+     <div [hidden]="!age.errors.required">
+      Age is required
+    </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email"  placeholder="test@gmail.com" name="email" ngModel  class="form-control">
+        <!--<input type="email" class="form-control" [(ngModel)]="user.email" placeholder="Email address" required   #email="ngModel" (blur)="emailValidator(email.value) == true ? emailIsInvalid = false : emailIsInvalid= true">
+                                    <div [hidden]="email.valid || email.pristine" class="alert alert-sm alert-danger">This field is required</div>
+                                    <div [hidden]="!emailIsInvalid" class="alert alert-sm alert-danger">Email address is invalid</div>-->
+      </div>
+      <button type="submit" class="btn btn-success"  [disabled]="!frmRegister.form.valid">Submit</button>
+      <button type="button" class="btn btn-danger">Cancel</button>
+ <!--<button  type="button" class="btn btn-success "
+                        id="btnManagerRatingCancel" data-toggle="modal"  data-target="#cancelManagerRatingSave" style="position:relative;left:90px">
+                    <i class="fa fa-ban"></i> Cancel
+                </button>-->
+ <input type="checkbox" id="primeSkill"  (change)="onChangeIsprimarySkill($event)" />
+
+    </form>
+     <div class="modal fade" id="cancelManagerRatingSave" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:#bbc7d2;">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Confirmation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4 id="myModalLabel">All your updates will be lost, are you sure you want to cancel ?</h4>
+                    </div>
+                    <div class="modal-footer" style="margin-top:auto;">
+                        <button type="button" class="btn btn-success" data-dismiss="modal" aria-hidden="true" (click)="cancelManagerRatingSaveClick();">Yes</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal PopUp End-->
+
+    <!--<div class="result">We have  users.</div>
+    <ul><li *ngFor="let person of persons">Name: , Age: , Email: </li></ul>-->
+</div>
+

@@ -1,0 +1,32 @@
+<h2> Prime Examples </h2>
+    <p-growl [(value)]="notifyMsg"></p-growl>
+    <div class="comtainer" style="padding-left:33%;">
+    <label>Select Student To filter: </label>
+    <p-autoComplete [(ngModel)]="name" [suggestions]="filterUser" (completeMethod)="filterUserList($event)" field="name" [size]="30"
+    placeholder="Search Student" [minLength]="1" (onSelect)="selectedStd($event)"  autoHighlight="true" (onClear)="resetList()"></p-autoComplete>
+    </div>
+
+    <div class="container" id="dvStdList">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Id </td>
+                <td>Name</td>
+                <td>Age</td>
+                <td>Email</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let std of stdList" (click)="getstdDet(std)">
+                <td style="font-weight: bold">{{std.id}}</td>
+
+                <!--<td> <a [routerLink]="['/students']" fragment='std.id' >{{std.name}}</a></td>-->
+                <!--<td> <a [routerLink]="['/students',  std.id ]">{{std.name}}</a></td>-->
+                <td>{{std.name}}</td>
+                <td>{{std.age}}</td>
+                <td>{{std.email}}</td>
+            </tr>
+        </tbody>
+    </table>
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+</div>

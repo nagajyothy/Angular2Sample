@@ -1,0 +1,98 @@
+<h2>Student Details</h2>
+<div class="container" [hidden]="stdEdit" *ngIf="stdDetails">
+    <form (ngSubmit)="OnSubmitStudent(frmStudent)" #frmStudent="ngForm">
+        <div class="form-group">
+            <label for="stdid"> Id   </label>
+            <input type="text" class="form-control" name="stdid" #stdid="ngModel" required [(ngModel)]="stdDetails.id" [disabled]="true" />
+
+        </div>
+        <div class="form-group">
+            <label for="stdname"> Name   </label>
+            <input type="text" class="form-control" name="stdname" [(ngModel)]="stdDetails.name" #stdname="ngModel" />
+        </div>
+         <div class="form-group">
+            <label for="stdage"> Age   </label>
+            <input type="number" class="form-control" name="stdage" [(ngModel)]="stdDetails.age" #stdage="ngModel" />
+        </div>
+        <div class="form-group">
+            <label for="stdmail"> Email   </label>
+            <input type="email" class="form-control" name="stdmail" [(ngModel)]="stdDetails.email" #stdmail="ngModel" />
+        </div>
+        <button type="button" class="btn btn-primary" (click)="stdSubmit()" >Submit</button>
+        <button type="button" class="btn btn-danger" (click)="backClicked()"> Cancel </button>
+    </form>
+</div>
+
+<div class="container" *ngIf="stdDetails" [hidden]="!stdEdit">
+    <h3>Selected Student Details: </h3><br/>
+    <label>Id: {{stdDetails.id}}</label><br/>
+    <label>Name: {{stdDetails.name}}</label><br/>
+
+    <label>Age: {{stdDetails.age}}</label><br/>
+    <label>Email : {{stdDetails.email}}</label><br/>
+    <button class="btn btn-primary" (click)="backClicked()" style="float:left;">Back</button>
+</div>
+
+
+<!--============================= optional data currently not using ==============================================-->
+
+
+
+<div class="container" [hidden]="true">
+
+    <form (ngSubmit)="OnSubmitStudent(frmStudent)" #frmStudent="ngForm">
+        <!--<form  #frmStudent="ngForm">-->
+        <div class="form-group">
+            <label for="stdName"> Name   </label>
+            <input type="text" class="form-control" name="stdName" required minlength="4" maxlength="24" [(ngModel)]="stdName" />
+            <!--<input type="text"
+				class="form-control"
+				required
+               [(ngModel)]="stdName" name="stdName"
+				#stdName="ngModel"/>-->
+        </div>
+        <div class="form-group">
+            <label for="fatherName"> Father Name   </label>
+            <input type="text" class="form-control" name="stdFatName" [(ngModel)]="stdFatName" #stFatName="ngModel" />
+        </div>
+        <div class="form-group">
+            <label for="motherName"> Mother Name   </label>
+            <input type="text" class="form-control" name="stdMotName" [(ngModel)]="stdMotName" #stMotName="ngModel" />
+        </div>
+        <div class="form-group">
+            <label for="stdDept"> Department   </label>
+            <select name="dept" class="form-control" [(ngModel)]="stdDept" #dept="ngModel" (change)="deptChange(dept.value)" [disabled]="stdEdit">
+                <option *ngFor="let item of deptList;" [value]="item.id">{{item.name}}</option>
+            </select>
+        </div>
+        <!--<button type="submit" class="btn btn-success" [disabled]="!frmStudent.form.valid">Submit</button>-->
+        <button type="button" class="btn btn-primary" [disabled]="!frmStudent.form.valid">Submit</button>
+        <button type="button" class="btn btn-danger" (click)="clearForm()"> Reset </button>
+    </form>
+</div>
+<div class="container" [hidden]="true">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Father Name</td>
+                <td>Mother Name</td>
+                <td> Dept number</td>
+                <td>Edit/Remove</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let std of studentList">
+                <td>{{std.stdName}}</td>
+                <td>{{std.stdFatName}}</td>
+                <td>{{std.stdMotName}}</td>
+                <td>{{std.dept}}</td>
+                <td><button type="button" class="btn btn-primary" (click)="editStudent(std)">Edit</button>
+                    <button type="button" class="btn btn-primary" (click)="removeStudent(std)">Remove</button></td>
+
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
